@@ -9,47 +9,6 @@
 	<artifactId>mosquito-jdbc</artifactId>
 	<packaging>jar</packaging>
 
-	<!--
-	<dependencies>
-	
-        <dependency>
-            <groupId>com.wukong.atp.framework</groupId>
-            <artifactId>atp-framework-core</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.wukong.atp.framework</groupId>
-            <artifactId>atp-framework-cache</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.wukong.atp.framework</groupId>
-            <artifactId>atp-framework-web</artifactId>
-        </dependency>
-
-		<dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-		</dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-	</dependencies>
-	-->
-
 	<dependencies>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>

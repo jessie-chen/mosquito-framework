@@ -1,5 +1,7 @@
 package tk.chandsir.mosquito.framework.core.utils
 
+import java.text.SimpleDateFormat
+
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
@@ -11,6 +13,10 @@ object JsonUtil {
   val jacksonMapper = new ObjectMapper() with ScalaObjectMapper
   jacksonMapper.registerModule(DefaultScalaModule)
   jacksonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
+  val df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+  jacksonMapper.setDateFormat(df)
+
 
   def toJson(value: Map[Symbol, Any]): String = {
     toJson(value map { case (k, v) => k.name -> v })

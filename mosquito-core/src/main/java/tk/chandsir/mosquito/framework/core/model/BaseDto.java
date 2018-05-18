@@ -1,6 +1,7 @@
 package tk.chandsir.mosquito.framework.core.model;
 
 import lombok.Data;
+import tk.chandsir.mosquito.framework.core.utils.JsonUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,4 +31,9 @@ public class BaseDto implements Serializable {
 	 */
 	protected Integer deleted = 0;
 
+
+    @Override
+    public String toString() {
+        return JsonUtil.toJson(this);
+    }
 }
