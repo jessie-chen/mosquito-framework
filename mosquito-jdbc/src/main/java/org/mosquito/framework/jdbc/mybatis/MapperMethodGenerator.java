@@ -1,6 +1,6 @@
 package org.mosquito.framework.jdbc.mybatis;
 
-import tk.chandsir.mosquito.framework.core.utils.StringUtils;
+import org.mosquito.framework.core.utils.StringUtils;
 
 import java.io.IOException;
 import java.io.Writer;

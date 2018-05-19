@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
 
 
 import lombok.Data;
-import tk.chandsir.mosquito.framework.core.utils.ObjectUtils;
+import org.mosquito.framework.core.utils.ObjectUtils;
 
 /** .
  * 通用Mapper XML构建类

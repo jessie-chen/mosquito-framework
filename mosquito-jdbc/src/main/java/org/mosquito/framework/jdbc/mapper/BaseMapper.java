@@ -3,8 +3,8 @@ package org.mosquito.framework.jdbc.mapper;
 import java.util.List;
 
 import com.github.pagehelper.Page;
-import tk.chandsir.mosquito.framework.core.model.BaseModel;
-import tk.chandsir.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.model.BaseModel;
+import org.mosquito.framework.core.model.BaseQuery;
 
 
 /**

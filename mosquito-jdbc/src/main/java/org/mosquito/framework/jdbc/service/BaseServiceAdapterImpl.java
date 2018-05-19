@@ -15,11 +15,11 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import tk.chandsir.mosquito.framework.core.exception.AppException;
-import tk.chandsir.mosquito.framework.core.model.BaseDto;
-import tk.chandsir.mosquito.framework.core.model.BaseModel;
-import tk.chandsir.mosquito.framework.core.model.BaseQuery;
-import tk.chandsir.mosquito.framework.core.utils.ObjectUtils;
+import org.mosquito.framework.core.exception.AppException;
+import org.mosquito.framework.core.model.BaseDto;
+import org.mosquito.framework.core.model.BaseModel;
+import org.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.utils.ObjectUtils;
 import org.mosquito.framework.jdbc.mapper.BaseMapper;
 import org.mosquito.framework.jdbc.page.Paging;
 import org.mosquito.framework.jdbc.page.PagingUtil;

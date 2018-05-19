@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import tk.chandsir.mosquito.framework.core.exception.AppException;
-import tk.chandsir.mosquito.framework.core.model.BaseDto;
-import tk.chandsir.mosquito.framework.core.model.BaseModel;
-import tk.chandsir.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.exception.AppException;
+import org.mosquito.framework.core.model.BaseDto;
+import org.mosquito.framework.core.model.BaseModel;
+import org.mosquito.framework.core.model.BaseQuery;
 import org.mosquito.framework.jdbc.page.Paging;
 
 /**

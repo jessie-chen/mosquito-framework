@@ -10,7 +10,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
-import tk.chandsir.mosquito.framework.core.utils.ObjectUtils;
+import org.mosquito.framework.core.utils.ObjectUtils;
 
 
 /** 

@@ -3,7 +3,7 @@ package org.mosquito.framework.jdbc.page;
 import com.github.pagehelper.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tk.chandsir.mosquito.framework.core.utils.ObjectUtils;
+import org.mosquito.framework.core.utils.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;

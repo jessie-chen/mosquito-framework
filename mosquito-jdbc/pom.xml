@@ -42,7 +42,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>tk.chandsir</groupId>
+			<groupId>org.mosquito</groupId>
 			<artifactId>mosquito-core</artifactId>
 		</dependency>
 
