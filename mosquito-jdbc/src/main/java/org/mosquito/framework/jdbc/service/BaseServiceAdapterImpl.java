@@ -53,6 +53,9 @@ public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M ex
 	@Autowired
 	protected MessageSource messageSource;
 
+	@Autowired
+	private PrincipalProvider principalProvider;
+
 	@Override
 	public Long insert(T dto) throws AppException {
 		Long result = 0L;
@@ -259,34 +262,38 @@ public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M ex
 		if (data instanceof BaseDto) {
 			BaseDto dto = (BaseDto) data;
 			String userId = null;
+
+			userId = principalProvider.getPrincipal();
+
 			/*
 			UserInfo userInfo =  ContextHolder.get().getUser();
 			if (!ObjectUtils.isNullOrEmpty(userInfo)) {
 				userId = userInfo.getUserId();
 			}
 			*/
+
+//			if (principalProvider != null) {
+//				userId = principalProvider.getPrincipal();
+//			}
+
 			if (isNew) {
 				if (ObjectUtils.isNullOrEmpty(dto.getCreateTime())) {
 					dto.setCreateTime(new Timestamp(System.currentTimeMillis()));
 				}
-				/*
 				if (!ObjectUtils.isNullOrEmpty(userId)) {
-					dto.setCreatedBy(userId);
+					dto.setCreator(userId);
 				} else {
-					dto.setCreatedBy("-1");
+					dto.setCreator("-1");
 				}
-				*/
 			}
 			if (ObjectUtils.isNullOrEmpty(dto.getUpdateTime())) {
 				dto.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 			}
-			/*
 			if (!ObjectUtils.isNullOrEmpty(userId)) {
-				dto.setUpdatedBy(userId);
+				dto.setModifier(userId);
 			} else {
-				dto.setUpdatedBy("-1");
+				dto.setModifier("-1");
 			}
-			*/
 			if (ObjectUtils.isNullOrEmpty(dto.getDeleted())) {
 				dto.setDeleted(DeletedFlag.DELETEDFLAG_NO.getValue());
 			}
