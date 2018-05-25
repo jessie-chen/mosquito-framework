@@ -259,18 +259,18 @@ public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M ex
 	 * @param data
 	 */
 	private void setDefault(T data, boolean isNew) {
+	    /*
 		if (data instanceof BaseDto) {
-			BaseDto dto = (BaseDto) data;
+//			BaseDto dto = (BaseDto) data;
+            T dto = data;
 			String userId = null;
 
 			userId = principalProvider.getPrincipal();
 
-			/*
-			UserInfo userInfo =  ContextHolder.get().getUser();
-			if (!ObjectUtils.isNullOrEmpty(userInfo)) {
-				userId = userInfo.getUserId();
-			}
-			*/
+//			UserInfo userInfo =  ContextHolder.get().getUser();
+//			if (!ObjectUtils.isNullOrEmpty(userInfo)) {
+//				userId = userInfo.getUserId();
+//			}
 
 //			if (principalProvider != null) {
 //				userId = principalProvider.getPrincipal();
@@ -298,6 +298,30 @@ public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M ex
 				dto.setDeleted(DeletedFlag.DELETEDFLAG_NO.getValue());
 			}
 		}
+		*/
+
+        String userId = principalProvider.getPrincipal();
+        if (isNew) {
+            if (ObjectUtils.isNullOrEmpty(data.getCreateTime())) {
+                data.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            }
+            if (!ObjectUtils.isNullOrEmpty(userId)) {
+                data.setCreator(userId);
+            } else {
+                data.setCreator("-1");
+            }
+        }
+        if (ObjectUtils.isNullOrEmpty(data.getUpdateTime())) {
+            data.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        }
+        if (!ObjectUtils.isNullOrEmpty(userId)) {
+            data.setModifier(userId);
+        } else {
+            data.setModifier("-1");
+        }
+        if (ObjectUtils.isNullOrEmpty(data.getDeleted())) {
+            data.setDeleted(DeletedFlag.DELETEDFLAG_NO.getValue());
+        }
 	}
 
 	/**

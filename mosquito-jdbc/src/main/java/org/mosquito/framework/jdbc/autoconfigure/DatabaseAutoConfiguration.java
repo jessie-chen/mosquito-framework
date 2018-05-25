@@ -8,16 +8,21 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
+import org.mosquito.framework.jdbc.service.PrincipalProvider;
+import org.mosquito.framework.jdbc.service.impl.PrincipalFallbackProvider;
+import org.mosquito.framework.jdbc.service.impl.PrincipalShiroProvider;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
@@ -81,6 +86,18 @@ public class DatabaseAutoConfiguration {
 		p.setProperty("dialect", "mysql");
 		pageHelper.setProperties(p);
 		return pageHelper;
+	}
+
+
+	@Bean
+	@ConditionalOnMissingBean(PrincipalProvider.class)
+	public PrincipalProvider fallbackPrincipalProvider() {
+		try {
+			Class.forName("org.apache.shiro.SecurityUtils");
+			return new PrincipalShiroProvider();
+		} catch (ClassNotFoundException e) {
+			return new PrincipalFallbackProvider();
+		}
 	}
 
 }

@@ -41,13 +41,13 @@ public class MapperMethodGenerator {
 
 	private static final String SEARCH = "search";
 
-	private static final String CREATION_DATE = "creation_date";
+	private static final String CREATION_DATE = "create_time";
 
-	private static final String CREATED_BY = "created_by";
+	private static final String CREATED_BY = "creator";
 
-	private static final String UPDATION_DATE = "updation_date";
+	private static final String UPDATION_DATE = "update_time";
 
-	private static final String UPDATED_BY = "updated_by";
+	private static final String UPDATED_BY = "modifier";
 
 	private static final String DELETED = "deleted";
 
