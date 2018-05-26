@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * . 通用Mapper单表操作方法生成器
@@ -112,6 +113,47 @@ public class MapperMethodGenerator {
 			writer.write(addSearch(table, idProertyClassType));
 		}
 
+
+		// alias
+		if (StringUtils.isNoneEmpty(table.getAlias())) {
+			if (table.getAliasColumns() == null) {
+				writer.write(addAliasColumnsSQL(table));
+			}
+			if (table.getAliasResultMap() == null) {
+				writer.write(addAliasResultMapSQL(table));
+			}
+		}
+	}
+
+	private static String addAliasResultMapSQL(CommonTable table) {
+		String alias = table.getAlias();
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("\n<resultMap id=\"%s\" type=\"%s\">\n", table.getAliasResultMapId(), table.getClassType()));
+
+		CommonTableColumn idColumn = table.getIdColumn();
+		sb.append(String.format("  <id column=\"%s_%s\" jdbcType=\"%s\" property=\"%s\" />\n",
+				alias, idColumn.getColumn(), idColumn.getJdbcType(), idColumn.getProperty()));
+
+		String fields = table.getColumnList().stream()
+				.map(c -> String.format("  <result column=\"%s_%s\" jdbcType=\"%s\" property=\"%s\" />",
+						alias, c.getColumn(), c.getJdbcType(), c.getProperty()))
+				.collect(Collectors.joining("\n"));
+
+		sb.append(fields);
+		sb.append("\n</resultMap>\n");
+		return sb.toString();
+	}
+
+	private static String addAliasColumnsSQL(CommonTable table) {
+		String alias = table.getAlias();
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n<sql id=\"" + table.getAliasColumnsId() + "\" >\n");
+		String fields = table.getAllColumnList().stream()
+				.map(c -> String.format("  %s.%s as %s_%s", alias, c.getColumn(), alias, c.getColumn()))
+				.collect(Collectors.joining(",\n"));
+		sb.append(fields);
+		sb.append("\n</sql>\n");
+		return sb.toString();
 	}
 
 	private static String addBaseColumnsSQL(CommonTable table) {

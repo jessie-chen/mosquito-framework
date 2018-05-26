@@ -62,6 +62,14 @@ public class CommonXmlMapperBuilder {
 
 	private KeyGenMode keyGenMode = KeyGenMode.IDENTITY;
 
+
+	private String tableAlias;
+
+	private String aliasColumns;
+
+	private String aliasResultMap;
+
+
 	public CommonXmlMapperBuilder() throws Exception {
 	}
 
@@ -176,6 +184,24 @@ public class CommonXmlMapperBuilder {
 		table.setColumnList(columnList);
 		// 获取Mapp里所有的select/insert/update/delete方式名
 		HashSet<String> existMethodSet = getExistMethod(xpath, rootNode);
+
+
+		// 查找 alias 相关定义.
+		table.setAliasColumnsId(aliasColumns);
+		table.setAliasResultMapId(aliasResultMap);
+		Node tableAliasNode = (Node) xpath.evaluate("sql[@id='" + tableAlias + "']", rootNode, XPathConstants.NODE);
+		if (tableAliasNode != null) {
+			table.setAlias(tableAliasNode.getTextContent().trim());
+		}
+		Node aliasColumnsNode = (Node) xpath.evaluate("sql[@id='" + aliasColumns + "'][1]", rootNode, XPathConstants.NODE);
+		if (aliasColumnsNode != null) {
+			table.setAliasColumns(aliasColumnsNode.getTextContent().trim());
+		}
+		Node aliasResultMapNode = (Node) xpath.evaluate("resultMap[@id='" + aliasResultMap + "'][1]", rootNode, XPathConstants.NODE);
+		if (aliasResultMapNode != null) {
+			table.setAliasResultMap(aliasResultMapNode.getTextContent().trim());
+		}
+
 
 		return rewriteXmlMapper(resource, table, existMethodSet);
 	}

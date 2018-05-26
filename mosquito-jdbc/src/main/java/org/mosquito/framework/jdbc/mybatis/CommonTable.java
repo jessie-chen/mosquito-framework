@@ -50,7 +50,7 @@ public class CommonTable {
 	private String baseColumnsId;
 
 	/**
-	 * 基础字段
+	 * 基础字段  <sql id="BaseColumns" />
 	 */
 	private String baseColumns;
 
@@ -58,6 +58,29 @@ public class CommonTable {
 	 * 命名空间
 	 */
 	private String namespace;
+
+
+    // 别名 alias
+
+    /**
+     * 表的别名. <Alias/>
+     */
+    private String alias;
+
+    /**
+     * 别名字段.  <sql id="AliasColumns" />
+     */
+    private String aliasColumns;
+
+    private String aliasColumnsId;
+
+    /**
+     * 别名结果集  <resultMap id="AliasResultMap" />
+     * @return
+     */
+    private String aliasResultMap;
+
+    private String aliasResultMapId;
 
 	public List<CommonTableColumn> getAllColumnList() {
 		List<CommonTableColumn> allColumnList = new ArrayList<CommonTableColumn>();

@@ -58,6 +58,11 @@ public class DatabaseAutoConfiguration {
 		builder.setBaseTableName("BaseTable");
 		builder.setGenerationType("GenerationType");
 		builder.setBaseColumns("BaseColumns");
+
+		builder.setTableAlias("Alias");
+		builder.setAliasColumns("AliasColumns");
+		builder.setAliasResultMap("AliasResultMap");
+
 		builder.setKeyGenMode(KeyGenMode.parse(StringUtils.defaultString(keyGenMode, KeyGenMode.IDENTITY.getCode())));
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(dataSource);
