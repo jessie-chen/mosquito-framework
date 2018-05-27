@@ -52,6 +52,26 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- scala -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_2.12</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
