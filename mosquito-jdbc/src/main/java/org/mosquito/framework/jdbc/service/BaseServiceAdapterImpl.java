@@ -1,40 +1,39 @@
 package org.mosquito.framework.jdbc.service;
 
-import java.lang.reflect.ParameterizedType;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.mosquito.framework.core.exception.AppException;
+import org.mosquito.framework.core.model.BaseDto;
+import org.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.model.Identity;
+import org.mosquito.framework.core.utils.ObjectUtils;
 import org.mosquito.framework.jdbc.constant.DeletedFlag;
+import org.mosquito.framework.jdbc.mapper.BaseMapper;
+import org.mosquito.framework.jdbc.page.Paging;
+import org.mosquito.framework.jdbc.page.PagingUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import org.mosquito.framework.core.exception.AppException;
-import org.mosquito.framework.core.model.BaseDto;
-import org.mosquito.framework.core.model.BaseModel;
-import org.mosquito.framework.core.model.BaseQuery;
-import org.mosquito.framework.core.utils.ObjectUtils;
-import org.mosquito.framework.jdbc.mapper.BaseMapper;
-import org.mosquito.framework.jdbc.page.Paging;
-import org.mosquito.framework.jdbc.page.PagingUtil;
+import java.lang.reflect.ParameterizedType;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 /**
  * . Service基础接口适配类
  * 
- * @param <T>
- * @param <K>
- * @param <M>
+ * @param <T>  DTO, ? extends BaseDto
+ * @param <K>  Model, ? extends BaseModel
+ * @param <M>  Mapper, ? extends BaseMapper
  * @author chenl
  * 
  */
-public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M extends BaseMapper<K>>
+public class BaseServiceAdapterImpl<T extends Identity, K extends Identity, M extends BaseMapper<K>>
 		  implements IBaseService<T, K> {
 
 	protected static final Logger LOGGER = LoggerFactory.getLogger(BaseServiceAdapterImpl.class);
@@ -256,50 +255,14 @@ public class BaseServiceAdapterImpl<T extends BaseDto, K extends BaseModel, M ex
 	/**
 	 * 设置添加公用参数
 	 *
-	 * @param data
+	 * @param data1
 	 */
-	private void setDefault(T data, boolean isNew) {
-	    /*
-		if (data instanceof BaseDto) {
-//			BaseDto dto = (BaseDto) data;
-            T dto = data;
-			String userId = null;
+	private void setDefault(T data1, boolean isNew) {
+	    if (!(data1 instanceof BaseDto)) {
+            return;
+        }
 
-			userId = principalProvider.getPrincipal();
-
-//			UserInfo userInfo =  ContextHolder.get().getUser();
-//			if (!ObjectUtils.isNullOrEmpty(userInfo)) {
-//				userId = userInfo.getUserId();
-//			}
-
-//			if (principalProvider != null) {
-//				userId = principalProvider.getPrincipal();
-//			}
-
-			if (isNew) {
-				if (ObjectUtils.isNullOrEmpty(dto.getCreateTime())) {
-					dto.setCreateTime(new Timestamp(System.currentTimeMillis()));
-				}
-				if (!ObjectUtils.isNullOrEmpty(userId)) {
-					dto.setCreator(userId);
-				} else {
-					dto.setCreator("-1");
-				}
-			}
-			if (ObjectUtils.isNullOrEmpty(dto.getUpdateTime())) {
-				dto.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-			}
-			if (!ObjectUtils.isNullOrEmpty(userId)) {
-				dto.setModifier(userId);
-			} else {
-				dto.setModifier("-1");
-			}
-			if (ObjectUtils.isNullOrEmpty(dto.getDeleted())) {
-				dto.setDeleted(DeletedFlag.DELETEDFLAG_NO.getValue());
-			}
-		}
-		*/
-
+        BaseDto data = (BaseDto) data1;
         String userId = principalProvider.getPrincipal();
         if (isNew) {
             if (ObjectUtils.isNullOrEmpty(data.getCreateTime())) {

@@ -6,9 +6,8 @@ import org.mosquito.framework.core.utils.JsonUtil
 
 import scala.beans.BeanProperty
 
-class BaseDto extends Serializable {
+class BaseDto extends Identity {
 
-  @BeanProperty var id: java.lang.Long = _
   @BeanProperty var createTime: Date = _
   @BeanProperty var updateTime: Date = _
   @BeanProperty var creator: String = _

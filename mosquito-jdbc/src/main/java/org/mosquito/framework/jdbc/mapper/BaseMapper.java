@@ -1,10 +1,10 @@
 package org.mosquito.framework.jdbc.mapper;
 
-import java.util.List;
-
 import com.github.pagehelper.Page;
-import org.mosquito.framework.core.model.BaseModel;
 import org.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.model.Identity;
+
+import java.util.List;
 
 
 /**
@@ -15,7 +15,7 @@ import org.mosquito.framework.core.model.BaseQuery;
  * @author chenl
  * 
  */
-public interface BaseMapper<K extends BaseModel> {
+public interface BaseMapper<K extends Identity> {
 
 	/**
 	 * 默认表名

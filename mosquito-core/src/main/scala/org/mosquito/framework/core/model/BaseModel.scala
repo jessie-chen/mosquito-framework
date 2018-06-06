@@ -4,9 +4,8 @@ import java.util.Date
 
 import scala.beans.BeanProperty
 
-class BaseModel extends Serializable {
+class BaseModel extends Identity {
 
-  @BeanProperty var id: java.lang.Long = _
   @BeanProperty var createTime: Date = _
   @BeanProperty var updateTime: Date = _
   @BeanProperty var creator: String = _

@@ -1,27 +1,25 @@
 package org.mosquito.framework.jdbc.service;
 
-import java.util.List;
-
+import org.mosquito.framework.core.exception.AppException;
+import org.mosquito.framework.core.model.BaseQuery;
+import org.mosquito.framework.core.model.Identity;
+import org.mosquito.framework.jdbc.page.Paging;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.mosquito.framework.core.exception.AppException;
-import org.mosquito.framework.core.model.BaseDto;
-import org.mosquito.framework.core.model.BaseModel;
-import org.mosquito.framework.core.model.BaseQuery;
-import org.mosquito.framework.jdbc.page.Paging;
+import java.util.List;
 
 /**
  * . Service基础接口
  * 
- * @param <T>
+ * @param <T> DTO, ? extends BaseDto
  *            .
- * @param <K>
+ * @param <K> Model, ? extends BaseModel
  *            .
  * @author chenl
  * 
  */
 @Transactional(rollbackFor = AppException.class)
-public interface IBaseService<T extends BaseDto, K extends BaseModel> {
+public interface IBaseService<T extends Identity, K extends Identity> {
 
 	/**
 	 * 插入数据
