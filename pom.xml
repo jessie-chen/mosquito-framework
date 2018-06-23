@@ -12,6 +12,7 @@
     <modules>
         <module>mosquito-core</module>
         <module>mosquito-jdbc</module>
+        <module>mosquito-security</module>
     </modules>
 
     <parent>
@@ -38,6 +39,7 @@
         <jackson.version>2.8.10</jackson.version>
         <slf4j.version>1.7.25</slf4j.version>
         <shiro.version>1.3.2</shiro.version>
+        <scala-logging.version>3.9.0</scala-logging.version>
     </properties>
     
     <dependencyManagement>
@@ -130,10 +132,17 @@
                 <version>${jackson.version}</version>
             </dependency>
 
+            <!-- shiro, todo -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-core</artifactId>
                 <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe.scala-logging</groupId>
+                <artifactId>scala-logging_2.12</artifactId>
+                <version>${scala-logging.version}</version>
             </dependency>
 
             <!-- modules -->
@@ -152,7 +161,10 @@
     </dependencyManagement>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
     
     <build>
